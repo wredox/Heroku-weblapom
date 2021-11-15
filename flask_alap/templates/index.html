@@ -1,0 +1,42 @@
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <title>{% block title %}Foxmont{% endblock %} - {% block subtitle %}{% endblock %}</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/menu_jquery.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/eu.cookies.box.css')}}"/>
+    <script src="{{ url_for('static', filename='js/eu.cookies.box.js')}}"></script>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    </head>
+    <body>
+        <div class="box">   
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible show">
+                            <button type="button" class="close" data-dismiss="alert" > X</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action = "/" method = "get">
+                <p>Adatatok bekérése:</p>
+
+                <p>Cikkszám<input type = "number" name = "beker" /></p>
+                <p>Termék súlya<input type = "float" name = "a" /></p>
+                <p><input type = "submit" value = "küldés" /></p>
+            </form>
+            {% if szamitas %}
+                <p>Eredmény: {{ szamitas }} méter !</p>
+            {% endif %}
+        </div>
+        
+    </body>
+</html>
