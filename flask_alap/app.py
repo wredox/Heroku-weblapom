@@ -18,7 +18,7 @@ app.config['SESSION_PROTECTION'] = 'W_m-iN7Kow3D'
 #     2.
 #        Ha a project nagyobb, optimálisabb, ha a definiciók külön fájlban vannak ( erre most nem térnék ki! )
 
-@app.route('/hello', methods = ['GET'])
+@app.route('/', methods = ['GET'])
 def hello_world():
     # Jelenleg ez az útvonal a 'Hello World!' stringel tér vissza.
     # Minden definiált függvénynek vissza kell adnia egy vagy több értéket
@@ -32,7 +32,7 @@ def hello_world():
 # Nézzünk egy 'get' hívást
 # Meghatározzun hogy mi történjen
 # Az álltalad küldött mintát használom
-@app.route('/', methods = ['GET'])  # Létre hoztuk az utvonalat
+@app.route('/calc', methods = ['GET'])  # Létre hoztuk az utvonalat
 def index():
     # Mivel s web stringként küldi át az at, meg kell probálnunk 
     # konvertálni, a számunkra megfelelő adattípusra
