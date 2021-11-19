@@ -18,7 +18,7 @@ app.config['SESSION_PROTECTION'] = 'W_m-iN7Kow3D'
 #     2.
 #        Ha a project nagyobb, optimálisabb, ha a definiciók külön fájlban vannak ( erre most nem térnék ki! )
 
-@app.route('/hello', methods = ['POST'])
+@app.route('/hello', methods = ['GET'])
 def hello_world():
     # Jelenleg ez az útvonal a 'Hello World!' stringel tér vissza.
     # Minden definiált függvénynek vissza kell adnia egy vagy több értéket
@@ -26,7 +26,7 @@ def hello_world():
     # beviteli módjának a methodusát.
     # A methodus lehet:  'post', 'get', 'head', 'put', 'delete'
     # Az alábbiakban a 'post' és a 'get' methodust fogjuk használni.
-    return 'Hello World!'
+    return render_template("hello.html")
 
 
 # Nézzünk egy 'get' hívást
