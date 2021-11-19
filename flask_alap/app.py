@@ -26,7 +26,7 @@ def hello_world():
     # beviteli módjának a methodusát.
     # A methodus lehet:  'post', 'get', 'head', 'put', 'delete'
     # Az alábbiakban a 'post' és a 'get' methodust fogjuk használni.
-    return "hello"
+    return render_template("hello.html")
 
 
 # Nézzünk egy 'get' hívást
