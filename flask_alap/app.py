@@ -10,7 +10,7 @@ app.config['SESSION_PROTECTION'] = 'W_m-iN7Kow3D'
 
 @app.route('/', methods = ['GET'])
 def hello_world():
-    return render_template("hello.html")
+    return render_template("indexx.html")
 
 
 @app.route('/calc', methods = ['GET'])
