@@ -83,7 +83,15 @@
             <p>Termék súlya<input type = "float" name = "a" /></p>
             <p><input type = "submit" value = "küldés" /></p>
         </form>
+
         {% if szamitas %}
+        <h3>{{item_details.cikk_neve}}</h3>
+        <ul>
+          <li>Obi cikkszám: {{item_details.obi_cikkszam}}</li>
+          <li>Szállítói cikkszám: {{item_details.szallitoi_cikkszam}}</li>
+          <li>EAN: {{item_details.ean}}</li>
+          <li>Egység súly: {{item_details.egyseg_suly}}</li>
+        </ul>
         <p>Eredmény: {{ szamitas }} méter !</p>
         {% endif %}
     </div>
