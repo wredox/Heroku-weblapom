@@ -56,6 +56,3 @@ def calc():
             else:
                 return render_template("calc.html", message={"text": "Helytelen értékeket adtál meg!", "category":"danger"})
     return render_template("calc.html", szamitas=str(szamitas), item_details=item)
-
-if __name__ == '__main__':
-    app.run(debug=True)
