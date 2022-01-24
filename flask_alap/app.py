@@ -24,13 +24,12 @@ def is_int(value):
     except:
         return False
 
-@app.route('/', methods = ['GET'])
-def hello_world():
-    return render_template("hello.html")
-
+@app.route('/')
+def index():
+    return render_template("index.html")
 
 @app.route('/calc', methods = ['GET'])
-def index():
+def calc():
     szamitas = ''
     item = None
     if request.method == 'GET':
@@ -48,14 +47,15 @@ def index():
                     item = get_item(beker)
                     szamolas = a / item["egyseg_suly"]
                     szamitas = round(szamolas,1)
-                    display_txt = 'Eredmény: {} méter !'.format(szamitas)
+                    display_txt = 'Eredmény: {} darab / méter !'.format(szamitas)
                     flash(display_txt , 'info')
                     print(item["egyseg_suly"], file = sys.stderr)
                     print(szamolas, file=sys.stderr)
                 else:
-                    flash('Negatív értéket nem adhatsz meg', 'danger')
+                    return render_template("calc.html", message={"text": "Negatív értéket nem adhatsz meg", "category":"danger"})
             else:
-                flash('Helytelen értékeket adtál meg!', 'danger')
+                return render_template("calc.html", message={"text": "Helytelen értékeket adtál meg!", "category":"danger"})
+    return render_template("calc.html", szamitas=str(szamitas), item_details=item)
 
-    
-    return render_template("index.html", szamitas=str(szamitas), item_details=item)
+if __name__ == '__main__':
+    app.run(debug=True)
