@@ -1,41 +1,38 @@
 import sys
 from flask import Flask, render_template, request, flash
 
-from data import szam
+from queries import get_item
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
 app.config['SESSION_PROTECTION'] = 'W_m-iN7Kow3D'
 
+def is_float(value):
+    '''
+    value paraméter: str()  
+    '''
+    try:
+        float(value)
+        return True
+    except:
+        return False
+    
+def is_int(value):
+    try:
+        int(value)
+        return True
+    except:
+        return False
 
-@app.route('/', methods = ['GET'])
-def hello_world():
-    return render_template("hello.html")
-
+@app.route('/')
+def index():
+    return render_template("index.html")
 
 @app.route('/calc', methods = ['GET'])
-def index():
-
-    def is_float(value):
-        '''
-        value paraméter: str()  
-        '''
-        try:
-            float(value)
-            return True
-        except:
-            return False
-        
-    def is_int(value):
-        try:
-            int(value)
-            return True
-        except:
-            return False
-
+def calc():
     szamitas = ''
+    item = None
     if request.method == 'GET':
-            
         if request.args.get('beker') and request.args.get('a') != 0 or None:
             print('Az adatok ellenőrizve!', file = sys.stderr)
             beker_str = request.args.get('beker')
@@ -47,18 +44,15 @@ def index():
                 print(beker, a, file = sys.stderr)
                 print(type(beker), type(a), file = sys.stderr)
                 if beker or a > 0:
-                    if szam.get(beker):
-                        szamolas = a / szam.get(beker)
-                        szamitas = round(szamolas,1)
-                        display_txt = 'Eredmény: {} méter !'.format(szamitas)
-                        flash(display_txt , 'info')
-                        print(szam.get(beker), file = sys.stderr)
-                        print(szamolas, file=sys.stderr)
+                    item = get_item(beker)
+                    szamolas = a / item["egyseg_suly"]
+                    szamitas = round(szamolas,1)
+                    display_txt = 'Eredmény: {} darab / méter !'.format(szamitas)
+                    flash(display_txt , 'info')
+                    print(item["egyseg_suly"], file = sys.stderr)
+                    print(szamolas, file=sys.stderr)
                 else:
-                    flash('Negatív értéket nem adhatsz meg', 'danger')
+                    return render_template("calc.html", message={"text": "Negatív értéket nem adhatsz meg", "category":"danger"})
             else:
-                flash('Helytelen értékeket adtál meg!', 'danger')
-
-    
-    return render_template("index.html", szamitas=str(szamitas))
-
+                return render_template("calc.html", message={"text": "Helytelen értékeket adtál meg!", "category":"danger"})
+    return render_template("calc.html", szamitas=str(szamitas), item_details=item)
