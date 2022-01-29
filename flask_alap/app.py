@@ -45,14 +45,19 @@ def calc():
                 print(type(beker), type(a), file = sys.stderr)
                 if beker or a > 0:
                     item = get_item(beker)
-                    szamolas = a / item["egyseg_suly"]
-                    szamitas = round(szamolas,1)
-                    display_txt = 'Eredmény: {} darab / méter !'.format(szamitas)
-                    flash(display_txt , 'info')
-                    print(item["egyseg_suly"], file = sys.stderr)
-                    print(szamolas, file=sys.stderr)
+                    if item:
+                        szamolas = a / item["egyseg_suly"]
+                        szamitas = round(szamolas,1)
+                        display_txt = 'Eredmény: {} darab / méter !'.format(szamitas)
+                        flash(display_txt , 'info')
+                        print(item["egyseg_suly"], file = sys.stderr)
+                        print(szamolas, file=sys.stderr)
+                    else:
+                        return render_template("calc.html", message={"text": "Cikkszám nem található", "category":"danger"})
                 else:
                     return render_template("calc.html", message={"text": "Negatív értéket nem adhatsz meg", "category":"danger"})
             else:
                 return render_template("calc.html", message={"text": "Helytelen értékeket adtál meg!", "category":"danger"})
     return render_template("calc.html", szamitas=str(szamitas), item_details=item)
+
+app.run()

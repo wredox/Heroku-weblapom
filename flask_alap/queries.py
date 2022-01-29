@@ -16,19 +16,22 @@ def get_item(item_id):
         """
 
     # Getting the data and unpacking into variables
-    obi_cikkszam, cikk_neve, szallitoi_cikkszam, ean, egyseg_suly = list(cur.execute(select_sql))[0]
-    
-    # Returning formatted result
-    return {
-        "obi_cikkszam": obi_cikkszam,
-        "cikk_neve": cikk_neve,
-        "szallitoi_cikkszam": szallitoi_cikkszam,
-        "ean": ean,
-        "egyseg_suly": egyseg_suly}
+    try:
+        obi_cikkszam, cikk_neve, szallitoi_cikkszam, ean, egyseg_suly = list(cur.execute(select_sql))[0]
+        
+        # Returning formatted result
+        return {
+            "obi_cikkszam": obi_cikkszam,
+            "cikk_neve": cikk_neve,
+            "szallitoi_cikkszam": szallitoi_cikkszam,
+            "ean": ean,
+            "egyseg_suly": egyseg_suly}
+    except IndexError:
+        return None
 
 # Example of usage
 # based on "szallitoi_cikkszam"
-# print(get_item("482237"))
+print(get_item("4821237"))
 
 # based on "obi_cikkszam"
 # print(get_item("3215050"))
