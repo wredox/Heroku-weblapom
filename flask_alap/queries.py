@@ -13,6 +13,7 @@ def get_item(item_id):
         SELECT * FROM 'cikkszam'
         WHERE obi_cikkszam = '{item_id}'
         OR szallitoi_cikkszam =  '{item_id}'
+        OR ean = '{item_id}'
         """
 
     # Getting the data and unpacking into variables
