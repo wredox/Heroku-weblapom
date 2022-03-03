@@ -18,7 +18,7 @@ def get_item(item_id):
 
     # Getting the data and unpacking into variables
     try:
-        obi_cikkszam, cikk_neve, szallitoi_cikkszam, ean, egyseg_suly = list(cur.execute(select_sql))[0]
+        obi_cikkszam, cikk_neve, szallitoi_cikkszam, ean, egyseg_suly, unit, picture = list(cur.execute(select_sql))[0]
         
         # Returning formatted result
         return {
@@ -26,7 +26,10 @@ def get_item(item_id):
             "cikk_neve": cikk_neve,
             "szallitoi_cikkszam": szallitoi_cikkszam,
             "ean": ean,
-            "egyseg_suly": egyseg_suly}
+            "egyseg_suly": egyseg_suly,
+            "unit": unit,
+            "kep": picture
+        }
     except IndexError:
         return None
 
