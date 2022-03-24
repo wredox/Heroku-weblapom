@@ -35,7 +35,7 @@ def get_item(item_id):
 
 # Example of usage
 # based on "szallitoi_cikkszam"
-print(get_item("4821237"))
+# print(get_item("4821237"))
 
 # based on "obi_cikkszam"
 # print(get_item("3215050"))
