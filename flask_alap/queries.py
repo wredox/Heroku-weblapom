@@ -39,3 +39,27 @@ def get_item(item_id):
 
 # based on "obi_cikkszam"
 # print(get_item("3215050"))
+
+def get_boxes():
+
+    # Database3 cursor, this will execute the sql queries
+    cur = con.cursor()
+
+    # Query for getting the data
+    select_sql = f"""
+        SELECT * FROM 'edenyek'
+        """
+
+    results = []
+
+    # Getting the data
+    for box in cur.execute(select_sql):
+        id, nev, suly = box
+        results.append({
+        "id": id,
+        "nev": nev,
+        "suly": suly,
+    })
+
+    # Returning results
+    return results
