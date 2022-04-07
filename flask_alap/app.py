@@ -40,7 +40,8 @@ def calc():
     print('Az adatok ellenőrizve!', file = sys.stderr)
     # Súly szám-e
     suly_str = request.args.get('suly')
-    if not is_int(suly_str) or not is_float(suly_str):
+    print(request.args.get('suly'))
+    if not is_int(suly_str) and not is_float(suly_str):
         return render_template("calc.html", boxes=boxes_data, message={"text": "Helytelen értékeket adtál meg a súlyhoz!", "category": "danger"})
         
     # Súly nem-negatív-e
