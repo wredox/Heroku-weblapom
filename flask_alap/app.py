@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
 app.config['SESSION_PROTECTION'] = 'W_m-iN7Kow3D'
 
+# teszt komment
+
 def is_float(value):
     '''
     value paraméter: str()  
