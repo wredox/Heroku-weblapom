@@ -53,8 +53,7 @@ def calc():
                 return render_template("calc.html", boxes=boxes_data, data=data, message={"text": "Súly nem lehet negatív!", "category": "danger"})
 
             # Cikkszám létezik-e az adatbázisban
-
-            cikkszam = int(data['cikkszam'])
+            cikkszam = data['cikkszam']
             item = get_item(cikkszam)
             if not item:
                 data.pop("cikkszam")
